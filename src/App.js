@@ -63,7 +63,9 @@ function App() {
         />
         <img
           className="icon"
-          onClick={() => console.log("func")}
+          onClick={() =>
+            window.open("https://github.com/chxry/cps-tester", "_blank")
+          }
           src={github}
           alt="invert"
         />
