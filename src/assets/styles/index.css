@@ -1,6 +1,9 @@
 body {
   margin: 0;
   font-family: "HelveticaBold";
+  background: var(--bg);
+  color: var(--text);
+  transition: background, color 400ms;
 }
 
 .App {
@@ -8,9 +11,22 @@ body {
   margin-right: 25%;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+}
+
 h1 {
   /*Page Title*/
   font-size: 84px;
+}
+
+.icon {
+  min-width: 56px;
+  min-height: 56px;
+  margin-left: 16px;
+  cursor: pointer;
+  filter: invert(var(--light));
 }
 
 h2 {
@@ -113,4 +129,16 @@ h3 {
   h1 {
     font-size: 60px;
   }
+}
+
+:root {
+  --bg: #fff;
+  --text: #000;
+  --light: 1;
+}
+
+.dark {
+  --bg: #222;
+  --text: #fff;
+  --light: 0;
 }

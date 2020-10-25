@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import { createRipple } from "./Ripple";
 import { useIsMount } from "./useIsMount";
+import invert from "./assets/icons/invert.svg";
+import github from "./assets/icons/github.svg";
 
 function msTossms(inputMS) {
   let seconds = Math.floor(inputMS / 1000);
@@ -17,6 +19,18 @@ function App() {
   const [testLength, setTestLength] = useState(5000);
   const [startTime, setStartTime] = useState(Date.now());
   const [clickerDisabled, setClickerDisabled] = useState(false);
+
+  let localDarkmode = localStorage.getItem("darkmode") === "true";
+  if (!localDarkmode) {
+    localDarkmode = false;
+  }
+  document.body.classList.add(localDarkmode ? "dark" : "light");
+  const [darkmode, setDarkmode] = useState(localDarkmode);
+  localStorage.setItem("darkmode", darkmode);
+  document.body.classList.replace(
+    darkmode ? "light" : "dark",
+    darkmode ? "dark" : "light"
+  );
 
   useEffect(() => {
     let interval = null;
@@ -39,7 +53,21 @@ function App() {
 
   return (
     <div className="App">
-      <h1>CPS Tester</h1>
+      <div className="title">
+        <h1>CPS Tester</h1>
+        <img
+          className="icon"
+          onClick={() => setDarkmode(!darkmode)}
+          src={invert}
+          alt="invert"
+        />
+        <img
+          className="icon"
+          onClick={() => console.log("func")}
+          src={github}
+          alt="invert"
+        />
+      </div>
       <button
         className="clicker"
         disabled={clickerDisabled}
