@@ -27,6 +27,7 @@ h1 {
   margin-left: 16px;
   cursor: pointer;
   filter: invert(var(--light));
+  transition: filter 400ms;
 }
 
 h2 {
