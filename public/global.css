@@ -7,6 +7,7 @@
   margin: 0;
   font-family: "Roboto", sans-serif;
   color: var(--text);
+  transition: all 400ms;
 }
 
 h1,
@@ -51,7 +52,6 @@ button {
   height: 240px;
   position: relative;
   overflow: hidden;
-  transition: background 400ms;
   background: var(--fg);
   border-radius: 0.25rem;
 }
