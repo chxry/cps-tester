@@ -1,0 +1,85 @@
+:root {
+  --bg: #151515;
+  --text: #fff;
+  --fg: #c0392b;
+  --disabled: #bdc3c7;
+  --width: 640px;
+}
+
+* {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+  color: var(--text);
+}
+
+h1,
+button,
+.history {
+  width: var(--width);
+  margin-top: 1rem;
+}
+
+main {
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+button {
+  height: 240px;
+  position: relative;
+  overflow: hidden;
+  transition: background 400ms;
+  background: var(--fg);
+  outline: 0;
+  border: 0;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: var(--disabled);
+  cursor: default;
+}
+
+button .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: #000;
+  opacity: 0.1;
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+  pointer-events: none;
+}
+
+button h2 {
+  font-size: 24px;
+  pointer-events: none;
+  position: relative;
+  z-index: 999;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+}
+
+.fade {
+  opacity: 0;
+  animation: fade 0.8s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 1;
+  }
+}
