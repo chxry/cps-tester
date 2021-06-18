@@ -5,10 +5,18 @@
     Cooldown,
   }
 
+  const themes = {
+    reddark: { bg: "151515", fg: "c0392b", text: "fff" },
+    bluedark: { bg: "151515", fg: "3498db", text: "fff" },
+    greendark: { bg: "151515", fg: "badc58", text: "fff" },
+    redlight: { bg: "fff", fg: "c0392b", text: "000" },
+    bluelight: { bg: "fff", fg: "3498db", text: "000" },
+    greenlight: { bg: "fff", fg: "badc58", text: "000" },
+  };
+
   let test = TestState.Idle;
   let clicks = 0;
   let testTime = 5;
-  let history = [];
 
   const round = (x: number) => Math.round((x + Number.EPSILON) * 100) / 100;
 
@@ -17,7 +25,6 @@
     if (test == TestState.Idle) {
       test = TestState.Testing;
       setTimeout(() => {
-        history = [round(clicks / testTime), ...history];
         test = TestState.Cooldown;
         setTimeout(() => {
           test = TestState.Idle;
@@ -41,11 +48,22 @@
     circle.classList.add("ripple");
     circle.addEventListener("animationend", () => target.removeChild(circle));
   };
+
+  const setTheme = (theme: string) => {
+    let root = document.documentElement;
+    let themeColours = themes[theme];
+    root.style.setProperty("--bg", `#${themeColours.bg}`);
+    root.style.setProperty("--fg", `#${themeColours.fg}`);
+    root.style.setProperty("--text", `#${themeColours.text}`);
+  };
+
+  setTheme("reddark");
 </script>
 
 <main>
   <h1>CPS Tester</h1>
   <button
+    class="clicker"
     on:click={(e) => handleClick(e)}
     disabled={test == TestState.Cooldown}
   >
@@ -57,10 +75,15 @@
       <h2>YOUR CPS: {round(clicks / testTime)}</h2>
     {/if}
   </button>
-  <div class="history">
-    <h2>History:</h2>
-    {#each history as record}
-      <p>{record}</p>
-    {/each}
+  <div class="bottom">
+    <h2>Theme:</h2>
+    <div class="themes">
+      {#each Object.entries(themes) as [theme, colours]}
+        <button
+          on:click={() => setTheme(theme)}
+          style={`background: linear-gradient( -45deg, #${colours.fg} 50%, #${colours.bg} 50% )`}
+        />
+      {/each}
+    </div>
   </div>
 </main>
