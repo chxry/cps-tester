@@ -1,18 +1,14 @@
 <script lang="ts">
+  import themes from "./themes.json";
+
   enum TestState {
     Testing,
     Idle,
     Cooldown,
   }
 
-  const themes = {
-    reddark: { bg: "151515", fg: "c0392b", text: "fff" },
-    bluedark: { bg: "151515", fg: "3498db", text: "fff" },
-    greendark: { bg: "151515", fg: "badc58", text: "fff" },
-    redlight: { bg: "fff", fg: "c0392b", text: "000" },
-    bluelight: { bg: "fff", fg: "3498db", text: "000" },
-    greenlight: { bg: "fff", fg: "badc58", text: "000" },
-  };
+  
+    
 
   let test = TestState.Idle;
   let clicks = 0;
@@ -50,14 +46,12 @@
   };
 
   const setTheme = (theme: string) => {
-    let root = document.documentElement;
-    let themeColours = themes[theme];
-    root.style.setProperty("--bg", `#${themeColours.bg}`);
-    root.style.setProperty("--fg", `#${themeColours.fg}`);
-    root.style.setProperty("--text", `#${themeColours.text}`);
+    Object.entries(themes[theme]).forEach(([key, colour]) =>
+      document.documentElement.style.setProperty(`--${key}`, `#${colour}`)
+    );
   };
 
-  setTheme("reddark");
+  setTheme("norddark");
 </script>
 
 <main>
